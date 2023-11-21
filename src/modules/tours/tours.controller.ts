@@ -55,6 +55,26 @@ const getSingleTour = async (req: Request, res: Response) => {
         });
     }
 }
+
+const updateSingleData = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const { title, price } = req.body
+        const result = await toursServices.updateDataFromDb(id, title, price)
+        res.status(200).json({
+            success: true,
+            message: 'Updated Tour data successfully',
+            data: result,
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: error.message || 'Something went wrong',
+            error: error,
+        });
+    }
+}
+
 const deleteSingleTour = async (req: Request, res: Response) => {
     try {
         const id = req.params.id
@@ -77,5 +97,6 @@ export const toursController = {
     createTours,
     getAllTours,
     getSingleTour,
+    updateSingleData,
     deleteSingleTour,
 }

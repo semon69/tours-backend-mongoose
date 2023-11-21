@@ -140,15 +140,15 @@ tourSchema.pre('aggregate', async function (next) {
 })
 
 // for static method
-// tourSchema.statics.isTourExists = async function (id: string) {
-//     const existingTour = await Tours.findOne({ id })
-//     return existingTour
-// }
+tourSchema.statics.isTourExists = async function (id: string) {
+    const existingTour = await Tours.findOne({ id })
+    return existingTour
+}
 
 // custom instance method
-tourSchema.methods.isUserExists = async function (id: string) {
-    const existingUser = await Tours.findOne({ id })
-    return existingUser
-}
+// tourSchema.methods.isUserExists = async function (id: string) {
+//     const existingUser = await Tours.findOne({ id })
+//     return existingUser
+// }
 
 export const Tours = model<TTours, TourModel>("Tours", tourSchema)

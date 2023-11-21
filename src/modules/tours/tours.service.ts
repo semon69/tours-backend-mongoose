@@ -32,6 +32,18 @@ const getSingleTourFromDb = async (id: string) => {
     return result
 }
 
+const updateDataFromDb = async (id: string, title: string, price: number) => {
+    const result = await Tours.updateOne(
+        { id: id },
+        {
+            $set: {
+                title: title,
+                price: price
+            }
+        })
+    return result
+}
+
 const deleteSingleTourFromDb = async (id: string) => {
     const result = await Tours.updateOne({ id: id }, { isDeleted: true })
     return result
@@ -41,5 +53,6 @@ export const toursServices = {
     createToursIntoDb,
     getAllToursFromDb,
     getSingleTourFromDb,
+    updateDataFromDb,
     deleteSingleTourFromDb
 }
