@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 
 export type TUserName = {
     firstName: string;
@@ -22,7 +22,7 @@ export type TTourGuide = {
 
 export type TTours = {
     id: string,
-    password: string,
+    user: Types.ObjectId,
     title: string,
     description: string,
     duration: number,

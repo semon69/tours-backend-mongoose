@@ -1,7 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TLocation, TTourGuide, TTours, TUserName, TourModel } from './tours/tours.interface';
-import bcrypt from "bcrypt"
-import config from '../config';
+import { TLocation, TTourGuide, TTours, TUserName, TourModel } from './tours.interface';
 
 
 const UserNameSchema = new Schema<TUserName>({
@@ -57,9 +55,9 @@ const tourSchema = new Schema<TTours, TourModel>({
         required: [true, 'Tour ID is required'],
         unique: true
     },
-    password: {
-        type: String,
-        required: [true, 'Password is required']
+    user: {
+        type: Schema.Types.ObjectId,
+        required: [true, 'User is required']
     },
     title: {
         type: String,
@@ -107,23 +105,10 @@ const tourSchema = new Schema<TTours, TourModel>({
         required: [true, 'Tour guide details are required']
     },
     isDeleted: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 });
-
-// Pre save middleware / hooks
-tourSchema.pre("save", async function (next) {
-    // const user = this
-    this.password = await bcrypt.hash(this.password, Number(config.bcrypt_salt_rounds))
-    next()
-})
-
-// Post save middleware/hooks
-tourSchema.post('save', async function (doc, next) {
-    doc.password = " "
-    next()
-})
-
 
 // Query middleware
 tourSchema.pre('find', async function (next) {

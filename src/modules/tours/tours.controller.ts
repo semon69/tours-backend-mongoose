@@ -1,26 +1,5 @@
 import { Request, Response } from "express";
 import { toursServices } from './tours.service';
-import ToursSchemaZod from "./tours.validation.zod";
-
-const createTours = async (req: Request, res: Response) => {
-    try {
-        const toursData = req.body
-        const zodValidationTours = ToursSchemaZod.parse(toursData)
-
-        const result = await toursServices.createToursIntoDb(zodValidationTours)
-        res.status(200).json({
-            success: true,
-            message: 'Tours create successfully',
-            data: result,
-        });
-    } catch (error: any) {
-        res.status(500).json({
-            success: false,
-            message: error.message || 'Something went wrong',
-            error: error,
-        });
-    }
-}
 
 const getAllTours = async (req: Request, res: Response) => {
     try {
@@ -94,7 +73,6 @@ const deleteSingleTour = async (req: Request, res: Response) => {
 }
 
 export const toursController = {
-    createTours,
     getAllTours,
     getSingleTour,
     updateSingleData,
