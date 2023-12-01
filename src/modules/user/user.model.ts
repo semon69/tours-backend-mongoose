@@ -1,9 +1,9 @@
 import { Schema, model } from 'mongoose';
-import { TUser, UserModel } from './users.interface';
+import { TUser } from './users.interface';
 import bcrypt from "bcrypt"
 import config from '../../config';
 
-const userSchema = new Schema<TUser, UserModel>({
+const userSchema = new Schema<TUser>({
   id: {
     type: String,
     required: true,
@@ -34,10 +34,6 @@ const userSchema = new Schema<TUser, UserModel>({
 });
 
 
-userSchema.statics.isUserExists = async function (id: string) {
-  const existingTour = await User.findById(id);
-  return existingTour;
-};
 
 // Pre save middleware / hooks
 userSchema.pre("save", async function (next) {
@@ -51,6 +47,11 @@ userSchema.post('save', async function (doc, next) {
     doc.password = " "
     next()
 })
+
+// userSchema.statics.isUserExists = async function (id: string) {
+//   const existingUser = await User.findById(id);
+//   return existingUser;
+// };
 
 
 export const User = model<TUser>('User', userSchema);

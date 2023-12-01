@@ -26,10 +26,10 @@ const createTourIntoDb = async (password: string, payload: TTours) => {
   payload.id = newUser.id;
   payload.user = newUser._id;
 
-  const isTourExist = await Tours.isTourExists(payload.id);
-  if (isTourExist) {
-    throw new Error('This Tour already exists');
-  }
+  // const isTourExist = await Tours.isTourExists(payload.id);
+  // if (isTourExist) {
+  //   throw new Error('This Tour already exists');
+  // }
 
   const newTour = await Tours.create(payload);
 

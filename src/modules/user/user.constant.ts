@@ -6,8 +6,6 @@ const findLastTourCode = async () => {
       createdAt: -1,
     })
     .lean();
-  console.log(lastStudent[0]?.tourCode);
-
   return lastStudent[0]?.tourCode;
 };
 
@@ -27,7 +25,6 @@ export const generateTourCode = async () => {
   //   }
 
   const incrementId = (Number(currentId) + 1).toString().padStart(4, '0');
-  console.log(currentId, incrementId);
   
   return incrementId;
 };

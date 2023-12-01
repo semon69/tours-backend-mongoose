@@ -1,4 +1,3 @@
-import { Model } from "mongoose";
 
 export type TUser = {
   id: string;
@@ -9,7 +8,7 @@ export type TUser = {
   isDeleted: boolean;
 };
 
-export interface UserModel extends Model<TUser> {
-  // eslint-disable-next-line no-unused-vars
-  isUserExists(id: string): Promise<TUser | null>
-}
+// export interface UserModel extends Model<TUser> {
+//   // eslint-disable-next-line no-unused-vars
+//   isUserExists(id: string): Promise<TUser | null>
+// }

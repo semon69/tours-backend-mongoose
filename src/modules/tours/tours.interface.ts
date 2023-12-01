@@ -1,4 +1,4 @@
-import { Model, Types } from "mongoose";
+import { Types } from "mongoose";
 
 export type TUserName = {
     firstName: string;
@@ -30,10 +30,10 @@ export type TTours = {
 };
 
 // original, static method
-export interface TourModel extends Model<TTours> {
-    // eslint-disable-next-line no-unused-vars
-    isTourExists(id: string): Promise<TTours | null>
-}
+// export interface TourModel extends Model<TTours> {
+//     // eslint-disable-next-line no-unused-vars
+//     isTourExists(id: string): Promise<TTours | null>
+// }
 
 // export type TToursMethods = {
 //     isTourExists(id: string): Promise<TTours | null>

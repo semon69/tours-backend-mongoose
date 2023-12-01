@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TLocation, TTours, TourModel } from './tours.interface';
+import { TLocation, TTours } from './tours.interface';
 
 const locationSchema = new Schema<TLocation>({
   name: {
@@ -17,7 +17,7 @@ const locationSchema = new Schema<TLocation>({
   },
 });
 
-const tourSchema = new Schema<TTours, TourModel>({
+const tourSchema = new Schema<TTours>({
   id: {
     type: String,
     required: [true, 'Tour ID is required'],
@@ -112,4 +112,4 @@ tourSchema.statics.isTourExists = async function (id: string) {
 //     return existingUser
 // }
 
-export const Tours = model<TTours, TourModel>('Tours', tourSchema);
+export const Tours = model<TTours>('Tours', tourSchema);
