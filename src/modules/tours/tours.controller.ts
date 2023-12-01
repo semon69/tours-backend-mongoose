@@ -4,7 +4,7 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import httpStatus from 'http-status';
 
-const getAllTours = catchAsync(async (req: Request, res: Response) => {
+const getAllTours = catchAsync(async (req, res) => {
   const result = await toursServices.getAllToursFromDb();
 
   sendResponse(res, {
@@ -12,10 +12,10 @@ const getAllTours = catchAsync(async (req: Request, res: Response) => {
     success: true,
     message: 'Get Tours data successfully',
     data: result,
-  });
+  })
 });
 
-const getSingleTour = catchAsync(async (req: Request, res: Response) => {
+const getSingleTour = catchAsync(async (req, res) => {
   const id = req.params.id;
   const result = await toursServices.getSingleTourFromDb(id);
 
@@ -24,7 +24,7 @@ const getSingleTour = catchAsync(async (req: Request, res: Response) => {
     success: true,
     message: 'Get Single Tour data successfully',
     data: result,
-  });
+  })
 });
 
 const updateSingleData = catchAsync(async (req: Request, res: Response) => {
@@ -37,19 +37,18 @@ const updateSingleData = catchAsync(async (req: Request, res: Response) => {
     success: true,
     message: 'Updated Tour data successfully',
     data: result,
-  });
+  })
 });
 
 const deleteSingleTour = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   const result = await toursServices.deleteSingleTourFromDb(id);
-
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Delete tour data successfully',
     data: result,
-  });
+  })
 });
 
 export const toursController = {
