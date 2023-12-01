@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 export type TUser = {
   id: string;
   password: string;
@@ -6,3 +8,8 @@ export type TUser = {
   status: 'open' | 'blocked';
   isDeleted: boolean;
 };
+
+export interface UserModel extends Model<TUser> {
+  // eslint-disable-next-line no-unused-vars
+  isUserExists(id: string): Promise<TUser | null>
+}

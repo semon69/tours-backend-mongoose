@@ -1,24 +1,36 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { userServices } from './user.services';
 
-const createTours = async (req: Request, res: Response) => {
+const createTours = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { password, tour } = req.body;
-    const result = await userServices.createTourIntoDb(password, tour);
+    const { password, tours } = req.body;
+    const result = await userServices.createTourIntoDb(password, tours);
     res.status(200).json({
       success: true,
       message: 'Create Tour data successfully',
       data: result,
     });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.message || 'Something went wrong',
-      error: error,
+  } catch (error) {
+    next(error);
+  }
+};
+
+const createTourGuide = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const {password, tourGuide } = req.body;
+    
+    const result = await userServices.createTourGuideIntoDb(password, tourGuide);
+    res.status(200).json({
+      success: true,
+      message: 'Create Tour Guide data successfully',
+      data: result,
     });
+  } catch (error) {
+    next(error);
   }
 };
 
 export const userController = {
   createTours,
+  createTourGuide
 };

@@ -11,18 +11,10 @@ export type TLocation = {
     description: string,
     activities: Array<string>
 }
-
-export type TTourGuide = {
-    name: TUserName,
-    experience: string,
-    language: string[],
-    contact: string,
-    profileImg?: string
-}
-
 export type TTours = {
     id: string,
     user: Types.ObjectId,
+    tourCode: string,
     title: string,
     description: string,
     duration: number,
@@ -32,13 +24,14 @@ export type TTours = {
     startDate: string,
     endDate: string,
     tourSize: number,
-    includes: string[],
-    tourGuide: TTourGuide,
+    includes: Array<string>,
+    tourGuide: Types.ObjectId,
     isDeleted?: boolean
 };
 
 // original, static method
 export interface TourModel extends Model<TTours> {
+    // eslint-disable-next-line no-unused-vars
     isTourExists(id: string): Promise<TTours | null>
 }
 
